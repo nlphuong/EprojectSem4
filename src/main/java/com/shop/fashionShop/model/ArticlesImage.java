@@ -1,28 +1,27 @@
 package com.shop.fashionShop.model;
 
-import com.shop.fashionShop.enumeric.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
-@Table(name = "inventory")
+@Table(name = "articles_image")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Inventory {
+public class ArticlesImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int amount;
-    private double price;
-    private Date createAt;
     @ManyToOne
-    @JoinColumn(name = "product_detail_id")
-    private ProductDetail productDetail;
+    @JoinColumn(name = "articles_id")
+    private Articles articles;
+    private String name;
+    @Lob
+    private byte[] image;
+
 }

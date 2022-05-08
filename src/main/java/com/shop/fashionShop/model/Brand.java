@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.Set;
 
 @Entity
 @Table(name = "Brand")
@@ -24,5 +25,7 @@ public class Brand {
     private String description;
     @Lob
     private byte [] logo;
+    @OneToMany(mappedBy = "brand",fetch = FetchType.EAGER)
+    private Set<Product> productSet;
 
 }

@@ -11,7 +11,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "order")
+@Table(name = "invoice")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,8 +21,8 @@ public class Invoice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String invoiceCode;
-    @OneToOne
-    @JoinColumn(name = "order_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id",referencedColumnName = "id")
     private Order order;
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;

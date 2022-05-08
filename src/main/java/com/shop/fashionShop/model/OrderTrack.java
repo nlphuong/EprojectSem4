@@ -10,19 +10,19 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "inventory")
+@Table(name = "order_track")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Inventory {
+public class OrderTrack {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int amount;
-    private double price;
-    private Date createAt;
-    @ManyToOne
-    @JoinColumn(name = "product_detail_id")
-    private ProductDetail productDetail;
+   @ManyToOne
+   @JoinColumn(name = "order_id")
+   private Order order;
+   @Enumerated(EnumType.STRING)
+   private Status status;
+   private Date createAt;
 }

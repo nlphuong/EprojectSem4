@@ -24,5 +24,8 @@ public class ProductImage {
     private String name;
     @Lob
     private byte[] image;
+    @ManyToOne
+    @JoinColumn(name = "product_detail_id")
+    private ProductDetail productDetail;
 
 }

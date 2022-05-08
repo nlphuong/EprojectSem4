@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.Set;
 
 @Entity
 @Table(name = "category")
@@ -22,5 +23,7 @@ public class Category {
     @Column(nullable = false)
     private String name;
     private String description;
+    @OneToMany(mappedBy = "category")
+    private Set<Product> productSet;
 
 }

@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "promotion")
@@ -25,4 +26,6 @@ public class Promotion {
    @Enumerated(EnumType.STRING)
    private Status status;
    private Date createAt;
+   @OneToMany(mappedBy = "promotion",fetch = FetchType.EAGER)
+   private Set<ProductDetail> productDetailSet;
 }

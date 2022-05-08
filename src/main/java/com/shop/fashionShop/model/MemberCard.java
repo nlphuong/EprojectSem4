@@ -27,4 +27,7 @@ public class MemberCard {
    @Enumerated(EnumType.STRING)
    private Status status;
    private Date createAt;
+   @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id",referencedColumnName = "id")
+    private Account account;
 }

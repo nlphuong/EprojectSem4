@@ -10,9 +10,10 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -26,7 +27,13 @@ public class Order {
     private String note;
     @Enumerated(EnumType.STRING)
     private Status status;
-    private String fullName;
-    private String address;
-    private String phone;
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
+    @OneToMany(mappedBy = "order",fetch = FetchType.EAGER)
+    private Set<OrderDetail> orderDetailSet;
+    @OneToMany(mappedBy = "order",fetch = FetchType.EAGER)
+    private Set<OrderTrack> orderTrackSet;
+    @OneToOne(mappedBy = "order")
+    private Invoice invoice;
 }

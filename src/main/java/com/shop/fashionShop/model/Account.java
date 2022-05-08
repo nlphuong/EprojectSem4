@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "account")
@@ -42,6 +43,19 @@ public class Account {
     private Date deletedAt;
 
     //region relationship
-
+    @OneToMany(mappedBy = "account",fetch = FetchType.EAGER)
+    private Set<Rating> ratingSet;
+    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
+    private Set<AnswerQuestion>  answerQuestions;
+    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
+    private Set<CartItem>  cartItemSet;
+    @OneToMany(mappedBy = "account",fetch = FetchType.EAGER)
+    private Set<AddressOrder> addressOrderSet;
+    @OneToMany(mappedBy = "account",fetch = FetchType.EAGER)
+    private Set<Order> orderSet;
+    @OneToMany(mappedBy = "account",fetch = FetchType.EAGER)
+    private Set<Voucher> voucherSet;
+    @OneToOne(mappedBy = "account")
+    private MemberCard memberCard;
     //endregion
 }

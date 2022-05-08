@@ -10,6 +10,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "product_detail")
@@ -31,5 +32,15 @@ public class ProductDetail {
     private int amount;
     private Date createAt;
     private Date deleteAt;
-
+    @ManyToOne
+    @JoinColumn(name = "promotion_id")
+    private Promotion promotion;
+    @OneToMany(mappedBy = "productDetail")
+    private Set<OrderDetail> orderDetailSet;
+    @OneToMany(mappedBy = "productDetail")
+    private Set<CartItem> cartItemSet;
+    @OneToMany(mappedBy = "productDetail",fetch = FetchType.EAGER)
+    private Set<ProductImage> productImageSet;
+    @OneToMany(mappedBy = "productDetail",fetch = FetchType.EAGER)
+    private Set<Inventory> inventorySet;
 }

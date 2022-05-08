@@ -1,6 +1,5 @@
 package com.shop.fashionShop.model;
 
-import com.shop.fashionShop.enumeric.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,19 +9,20 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "inventory")
+@Table(name = "cart_item")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Inventory {
+public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int amount;
-    private double price;
-    private Date createAt;
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
     @ManyToOne
     @JoinColumn(name = "product_detail_id")
     private ProductDetail productDetail;
+    private int quantity;
 }

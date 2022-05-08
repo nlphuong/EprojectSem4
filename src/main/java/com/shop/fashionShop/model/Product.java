@@ -10,6 +10,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "product")
@@ -37,5 +38,14 @@ public class Product {
     private Gender gender;
     private Date createAt;
     private Date deleteAt;
-
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private Brand brand;
+    @OneToMany(mappedBy = "product",fetch = FetchType.EAGER)
+    private Set<Rating> ratingSet;
+    @OneToMany(mappedBy = "product",fetch = FetchType.EAGER)
+    private Set<AnswerQuestion> answerQuestions;
 }

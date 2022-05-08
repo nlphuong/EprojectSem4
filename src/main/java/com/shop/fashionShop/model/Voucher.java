@@ -29,4 +29,7 @@ public class Voucher {
    @Enumerated(EnumType.STRING)
    private Status status;
    private Date createAt;
+   @ManyToOne
+   @JoinColumn(name = "account_id")
+   private Account account;
 }

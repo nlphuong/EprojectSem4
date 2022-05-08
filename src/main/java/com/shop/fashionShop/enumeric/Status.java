@@ -10,7 +10,7 @@ public enum Status {
     PREPARING,
     SHIPPED,
     DELIVERED,
-    //status invoice
+    //status order
     PAID,
     UNPAID
 }
