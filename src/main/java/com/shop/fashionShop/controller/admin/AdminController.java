@@ -21,20 +21,20 @@ public class AdminController {
 
     //Manager Account
 
-    @GetMapping("/listAccount")
-    public String account() {
-        return "admin/account/all_customer";
-    }
-
-    @GetMapping("/addAccount")
-    public String addAccount() {
-        return "admin/account/add_customer";
-    }
-
-    @GetMapping("/profile")
-    public String profile() {
-        return "admin/account/profile";
-    }
+//    @GetMapping("/listAccount")
+//    public String account() {
+//        return "admin/account/all_customer";
+//    }
+//
+//    @GetMapping("/addAccount")
+//    public String addAccount() {
+//        return "admin/account/add_customer";
+//    }
+//
+//    @GetMapping("/profile")
+//    public String profile() {
+//        return "admin/account/profile";
+//    }
 
 
 
@@ -53,15 +53,15 @@ public class AdminController {
 
 //Manager Category
 
-    @GetMapping("/category")
-    public String allCategory() {
-        return "admin/category/all_category";
-    }
-
-    @GetMapping("/addCategory")
-    public String addCategory() {
-        return "admin/category/add_category";
-    }
+//    @GetMapping("/category")
+//    public String allCategory() {
+//        return "admin/category/all_category";
+//    }
+//
+//    @GetMapping("/addCategory")
+//    public String addCategory() {
+//        return "admin/category/add_category";
+//    }
 
 //Manager Product
 
