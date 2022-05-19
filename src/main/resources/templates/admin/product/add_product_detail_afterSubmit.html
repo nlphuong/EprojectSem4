@@ -54,7 +54,7 @@
                                         <tr th:each="pd:${product.productDetailSet}" >
                                             <td th:utext="${pd.color}"></td>
                                             <td th:utext="${pd.size}"></td>
-                                            <td th:utext="${pd.amount}"></td>
+                                            <td th:utext="${pd.getQuantity}"></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -101,7 +101,7 @@
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label">Quantity</label>
                                             <div class="col-lg-9">
-                                                <input type="number" th:field="*{amount}"  class="form-control" >
+                                                <input type="number" th:field="*{getQuantity}" class="form-control" >
                                             </div>
                                         </div>
                                     </div>

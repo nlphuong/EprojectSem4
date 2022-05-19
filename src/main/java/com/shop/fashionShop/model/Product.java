@@ -48,6 +48,8 @@ public class Product {
     @JoinColumn(name = "brand_id")
     private Brand brand;
     @OneToMany(mappedBy = "product",fetch = FetchType.EAGER)
+    private Set<ProductDetail> productDetailSet;
+    @OneToMany(mappedBy = "product",fetch = FetchType.EAGER)
     private Set<Rating> ratingSet;
     @OneToMany(mappedBy = "product",fetch = FetchType.EAGER)
     private Set<AnswerQuestion> answerQuestions;
