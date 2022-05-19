@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin")
-public class AccountController {
+public class AccountAdminController {
 
     @Autowired
     private AccountService accountService;
@@ -32,10 +32,10 @@ public class AccountController {
         return "redirect:/admin/category";
     }
 
-    @GetMapping("deleteCategory/{id}")
-    public String deleteCategory(@PathVariable("id") int id) {
+    @GetMapping("deleteAccount/{id}")
+    public String deleteAccount(@PathVariable("id") int id) {
         accountService.deleteAccount(id);
-        return "redirect:/admin/category";
+        return "redirect:/admin/listAccount";
     }
 
     @GetMapping("/profile/{id}")

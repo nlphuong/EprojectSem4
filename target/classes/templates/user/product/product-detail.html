@@ -193,15 +193,15 @@
                                     <h6>Color</h6>
                                     <div class="pd-color-choose">
                                         <div class="cc-item">
-                                            <input type="radio" id="cc-black">
-                                            <label for="cc-black"></label>
+                                            <input type="radio" name="a" value="v1" id="cc-black">
+                                            <label for="cc-black" c></label>
                                         </div>
                                         <div class="cc-item">
-                                            <input type="radio" id="cc-yellow">
+                                            <input type="radio" name="a" value="v2" id="cc-yellow">
                                             <label for="cc-yellow" class="cc-yellow"></label>
                                         </div>
                                         <div class="cc-item">
-                                            <input type="radio" id="cc-violet">
+                                            <input type="radio" name="a" value="v3" id="cc-violet">
                                             <label for="cc-violet" class="cc-violet"></label>
                                         </div>
                                     </div>
@@ -566,6 +566,11 @@
 </div>
 
 <script layout:fragment="script">
+    $('input[type=radio][name=a]').change(function(e) {
+
+            alert("sang");
+
+    });
 </script>
 </body>
 </html>

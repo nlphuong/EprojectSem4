@@ -117,8 +117,7 @@ public class AdminController {
 
     //Manager Rating and Comment
 
-    @GetMapping("/comment")
-    public String allComment() {
+    @GetMapping("/comment")    public String allComment() {
         return "admin/comment/all_comment";
     }
 

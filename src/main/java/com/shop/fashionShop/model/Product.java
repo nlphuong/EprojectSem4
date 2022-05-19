@@ -23,6 +23,9 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(nullable = false,unique = true)
+    @NotEmpty(message = "Product code can not blank!")
+    private String productCode;
+    @Column(nullable = false,unique = true)
     @NotEmpty(message = "Product name can not blank!")
     private String name;
     private String shortDescription;

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/admin_layout_index}">
+<body>
+<div layout:fragment="content">
+    <link rel="stylesheet" th:href="@{/admin/assets/css/templatemo-style.css}" type="text/css">
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="page-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h3 class="page-title mt-5">ADD PRODUCT</h3> </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-6 d-flex">
+                    <div class="card flex-fill">
+                        <div class="card-header">
+                            <h4 class="card-title">Product Infomation</h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="#" th:object="${product}">
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label">Product Code</label>
+                                    <div class="col-lg-9">
+                                        <input th:field="*{productCode}" disabled type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label">Name</label>
+                                    <div class="col-lg-9">
+                                        <input th:field="*{name}" disabled type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label">Price</label>
+                                    <div class="col-lg-9">
+                                        <input th:field="*{price}" disabled type="email" class="form-control">
+                                    </div>
+                                </div>
+                                <div>
+                                    <table class="table table-hover table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>Color</th>
+                                            <th>Size</th>
+                                            <th>Quantity</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:if="${product.productDetailSet.size()==0}">
+                                            <td colspan="3">No data, please add style</td>
+                                        </tr>
+                                        <tr th:each="pd:${product.productDetailSet}" >
+                                            <td th:utext="${pd.color}"></td>
+                                            <td th:utext="${pd.size}"></td>
+                                            <td th:utext="${pd.amount}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 d-flex">
+                    <div class="card flex-fill">
+                        <div class="card-header">
+                            <h4 class="card-title">Add new style</h4>
+                        </div>
+                        <div class="card-body">
+                            <form id="detailForm" th:object="${productDetail}" th:action="@{/admin/productDetail/postProductDetail}" method="post" enctype="multipart/form-data">
+                                <div class="row">
+                                    <input  th:field="*{product}"/>
+                                    <input  th:field="*{sell_price}"/>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">Color</label>
+                                            <div class="col-lg-9">
+                                                <select th:field="*{color}" type="text" class="form-control">
+                                                    <option value="BLACK">BLACK</option>
+                                                    <option value="BLUE">BLUE</option>
+                                                    <option value="GREEN">GREEN</option>
+                                                    <option value="GREY">GREY</option>
+                                                    <option value="RED">RED</option>
+                                                    <option value="WHITE">WHITE</option>
+                                                    <option value="YELLOW">YELLOW</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">Size</label>
+                                            <div class="col-lg-9">
+                                                <input th:field="*{size}" type="text" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label">Quantity</label>
+                                            <div class="col-lg-9">
+                                                <input type="number" th:field="*{amount}"  class="form-control" >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <input  type="file" name="images" onchange="imagesPreview(this, 'div.gallery')" multiple id="gallery-photo-add">
+                                    <div class="gallery"></div>
+                                </div>
+                                <div class="text-right">
+                                    <button type="submit" class="btn btn-primary">Add Style</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script layout:fragment="script">
+    // Multiple images preview in browser
+    var imagesPreview = function(input, placeToInsertImagePreview) {
+        $('.gallery').empty()
+        if (input.files) {
+            var filesAmount = input.files.length;
+            for (i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+
+                reader.onload = function(event) {
+                    $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                }
+                reader.readAsDataURL(input.files[i]);
+            }
+        }
+    };
+    $('#gallery-photo-add').on('change', function() {
+        $('#gallery-photo-add').empty()
+        imagesPreview(this, 'div.gallery');
+
+    });
+</script>
+</body>
+</html>

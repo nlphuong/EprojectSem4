@@ -1,0 +1,28 @@
+/*
+
+Product Admin CSS Template
+
+https://templatemo.com/tm-524-product-admin
+
+*/
+
+
+.hideContentToLeft{
+  position: relative;
+  animation-name: moveToLeft;
+  animation-duration: 1s;
+}
+.moveContentAfter{
+  position: relative;
+  animation-name: moveToLeft2;
+  animation-duration: 2s;
+}
+@keyframes moveToLeft {
+  0%   {background-color:green; left:0px; top:0px;}
+  100% {background-color:yellow; left:-200px; top:0px; opacity:0;}
+}
+@keyframes moveToLeft2 {
+  0%   {background-color:yellow; left:200px; top:0px;opacity: 0}
+  100% {background-color:green; left:0px; top:0px; opacity:1;}
+}
+

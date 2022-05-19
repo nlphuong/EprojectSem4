@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Set;
 
@@ -23,12 +24,15 @@ public class ProductDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Enumerated(EnumType.STRING)
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
     private Color color;
     private String size;
     private double sell_price;
     @Enumerated(EnumType.STRING)
     private Status status;
-    @NotEmpty(message = "Amount cannot blank!")
+    @NotNull(message = "Amount cannot blank!")
     private int amount;
     private Date createAt;
     private Date deleteAt;
@@ -43,4 +47,8 @@ public class ProductDetail {
     private Set<ProductImage> productImageSet;
     @OneToMany(mappedBy = "productDetail",fetch = FetchType.EAGER)
     private Set<Inventory> inventorySet;
+
+    public ProductDetail(int id) {
+        this.id = id;
+    }
 }
