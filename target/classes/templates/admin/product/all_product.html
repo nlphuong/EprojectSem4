@@ -11,23 +11,132 @@
                 <div class="row align-items-center">
                     <div class="col">
                         <div class="mt-5">
-                            <h4 class="card-title float-left mt-2">Products</h4> <a href="add-customer.html"
-                                                                                     class="btn btn-primary float-right veiwbutton">Add
-                            Product</a></div>
+                            <h4 class="card-title float-left mt-2">PRODUCT LIST</h4>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="row">
+                <div class="col-lg-12">
+                    <form th:action="@{/admin/product/listProduct}" method="post" th:object="${filterProduct}">
+                        <div class="row formtype">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Product Code</label>
+                                    <input type="text" class="form-control" th:field="*{productCode}">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Product Name</label>
+                                    <input type="text" class="form-control"  th:field="*{productName}">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <select th:field="*{category}" class="form-control">
+                                        <option value="-1" selected>All</option>
+                                        <option th:each="c:${categoryList}" th:utext="${c.name}" th:value="${c.id}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label></label>
+                                    <button type="submit"   class="btn btn-success btn-block mt-0 search_button"> Search </button>
 
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="datatable table table-stripped">
+                                    <thead>
+                                    <tr>
+                                        <th>Product Code</th>
+                                        <th>Name</th>
+                                        <th>Brand</th>
+                                        <th>Category</th>
+                                        <th>Price</th>
+                                        <th class="text-right">Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="e:${products}">
+                                        <td th:utext="${e.productCode}"></td>
+                                        <td th:utext="${e.name}"></td>
+                                        <td th:utext="${e.brand.name}"></td>
+                                        <td th:utext="${e.category.name}"></td>
+                                        <td th:utext="${e.price}"></td>
+                                        <td class="text-right">
+                                            <div class="dropdown dropdown-action">
+                                                <a href="#" class="action-icon dropdown-toggle"
+                                                   data-toggle="dropdown" aria-expanded="false"><i
+                                                        class="fas fa-ellipsis-v ellipse_color"></i></a>
+                                                <div class="dropdown-menu dropdown-menu-right">
+                                                    <a class="dropdown-item" th:href="@{/admin/product/detail/{id}(id=${e.id})}"><i
+                                                            class="fas fa-pencil-alt m-r-5"></i> Detail</a>
+                                                    <a class="dropdown-item" href="#" data-toggle="modal"
+                                                       data-target="#delete_asset"><i
+                                                            class="fas fa-trash-alt m-r-5"></i> Delete</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="delete_asset" class="modal fade delete-modal" role="dialog">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body text-center">
+                            <img src="assets/img/sent.png" alt="" width="50" height="46">
+                            <h3 class="delete_class">Are you sure want to delete this Asset?</h3>
+                            <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
 
 </div>
 
 <script layout:fragment="script">
-
+    $(document).ready(function() {
+        toastr.success('Success messages');
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+    });
 </script>
 </body>
 </html>

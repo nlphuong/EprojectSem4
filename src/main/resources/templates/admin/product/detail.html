@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/admin_layout_index}">
+
+<body>
+
+<div layout:fragment="content">
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="page-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h3 class="page-title mt-5">Product Infomation</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form th:action="@{/admin/product/update}" th:object="${product}" method="post">
+                        <input hidden th:field="*{id}">
+                        <div class="row formtype">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Product Code</label>
+                                    <input class="form-control" th:field="*{productCode}">
+                                </div>
+                                <p th:if="${#fields.hasErrors('productCode')}" class="text-danger" th:errors="*{productCode}"></p>
+                                <p class="text-danger" th:if="${existCode}">This product code already exists</p>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input class="form-control" th:field="*{name}">
+                                </div>
+                                <p th:if="${#fields.hasErrors('name')}" class="text-danger" th:errors="*{name}"></p>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Price</label>
+                                    <input class="form-control" type="number" th:field="*{price}">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="display-block">For</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio"  id="maleGender" th:field="*{gender}" th:value="MALE" th:checked="${product.gender=='MALE'}?'checked'">
+                                    <label class="form-check-label" for="maleGender">
+                                        MALE
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio"  id="femaleGender" th:field="*{gender}" th:checked="${product.gender=='FEMALE'}?'checked'" th:value="FEMALE">
+                                    <label class="form-check-label" for="femaleGender">
+                                        FEMALE
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio"  id="everyone" th:field="*{gender}" th:checked="${product.gender=='EVERYONE'}?'checked'" th:value="EVERYONE">
+                                    <label class="form-check-label" for="everyone">
+                                        EVERYONE
+                                    </label>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <select class="form-control" th:field="*{category}">
+                                        <option th:each="c:${categoryList}" th:utext="${c.name}" th:value="${c.id}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Brand</label>
+                                    <select class="form-control" th:field="*{brand}">
+                                        <option th:each="c:${brandList}" th:utext="${c.name}" th:value="${c.id}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="display-block">Status</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio"  id="blog_active" th:field="*{status}" th:value="ACTIVE" th:checked="${product.status=='ACTIVE'}?'checked'">
+                                    <label class="form-check-label" for="blog_active">
+                                        Active
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio"  id="blog_inactive" th:field="*{status}" th:checked="${product.status=='INACTIVE'}?'checked'" th:value="INACTIVE">
+                                    <label class="form-check-label" for="blog_inactive">
+                                        Inactive
+                                    </label>
+                                </div>
+
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea class="form-control" rows="5" th:field="*{fullDescription}"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class="content container-fluid">
+            <div class="page-header">
+                <div class="row align-items-center">
+                    <div class="col">
+<!--                        <h3 class="page-title mt-5">List product detail</h3>-->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">List style</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th>Color</th>
+                                        <th>Size</th>
+                                        <th>Sell Price</th>
+                                        <th>Quantity</th>
+                                        <th>Status</th>
+                                        <th>Image</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    <tr th:each="p:${product.productDetailSet}" class="table-info">
+                                        <td th:utext="${p.color}"></td>
+                                        <td th:utext="${p.size}"></td>
+                                        <td th:utext="${p.sell_price}"></td>
+                                        <td th:utext="${p.quantity}"></td>
+                                        <td  >
+                                            <span th:utext="${p.status}" th:attr="class=${p.status.name()=='AVAILABLE'?'btn btn-rounded btn-success':'btn btn-rounded btn-warning'}"> </span>
+                                        </td>
+                                        <td>
+                                            <span th:each="photo:${p.productImageSet}" ><img th:src="@{/productImage/display/{id}(id=${photo.id})}"></span>
+                                        </td>
+                                        <td class="text-right">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" th:attr="data-target='#myModal'+${p.id }" >Edit</button>
+                                        </td>
+                                        <div class="modal"  th:id="myModal+${p.id}">
+                                            <div class="modal-dialog modal-lg" style="max-width: 1000px!important;">
+                                                <div class="modal-content" >
+
+                                                    <!-- Modal Header -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">Product Detail</h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+
+                                                    <!-- Modal body -->
+                                                    <div class="modal-body">
+                                                        <form id="detailForm"  th:action="@{/admin/productDetail/updateProductDetail}" method="post" enctype="multipart/form-data">
+                                                            <div class="row">
+                                                                <input hidden name="id" th:value="${p.id}" />
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group row">
+                                                                        <label class="col-lg-3 col-form-label">Color</label>
+                                                                        <div class="col-lg-9">
+                                                                            <select name="color"  type="text" class="form-control">
+                                                                                <option  th:selected="${p.color.name()=='BLACK'}" value="BLACK">BLACK</option>
+                                                                                <option th:selected="${p.color.name()=='BLUE'}" value="BLUE">BLUE</option>
+                                                                                <option  th:selected="${p.color.name()=='GREEN'}" value="GREEN">GREEN</option>
+                                                                                <option  th:selected="${p.color.name()=='GREY'}" value="GREY">GREY</option>
+                                                                                <option  th:selected="${p.color.name()=='RED'}" value="RED">RED</option>
+                                                                                <option  th:selected="${p.color.name()=='WHITE'}" value="WHITE">WHITE</option>
+                                                                                <option  th:selected="${p.color.name()=='YELLOW'}" value="YELLOW">YELLOW</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group row">
+                                                                        <label class="col-lg-3 col-form-label">Size</label>
+                                                                        <div class="col-lg-9">
+                                                                            <input name="size" th:value="${p.size}" type="text" class="form-control">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group row">
+                                                                        <label class="col-lg-3 col-form-label">Quantity</label>
+                                                                        <div class="col-lg-9">
+                                                                            <input name="quantity" type="number" th:value="${p.quantity}"  class="form-control" >
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <input title=" " style="color:transparent; width:120px;" type="file" name="images" th:attr="onchange=|imagesPreview(this,'div.gallery${p.id}')|"   multiple >
+                                                                    <div th:class="gallery+${p.id}">
+                                                                        <span th:each="photo:${p.productImageSet}" ><img th:src="@{/productImage/display/{id}(id=${photo.id})}"></span>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="text-right">
+                                                                <button type="submit" class="btn btn-primary">Update</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script th:inline="javascript" layout:fragment="script">
+    var imagesPreview = function(input, placeToInsertImagePreview) {
+        $(placeToInsertImagePreview).empty()
+        if (input.files) {
+            var filesAmount = input.files.length;
+            for (i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+
+                reader.onload = function(event) {
+                    $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                }
+                reader.readAsDataURL(input.files[i]);
+            }
+        }
+    };
+
+
+
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+
+</script>
+</body>
+</html>

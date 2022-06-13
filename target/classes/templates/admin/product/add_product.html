@@ -114,28 +114,30 @@
 
     $( document ).ready(function() {
         var message = /*[[${listProductCode}]]*/ 'default';
-        $('#productCode').on('mouseout',function(e){
+        $('#productCode').on('change',function(e){
             for (var a of message){
                 console.log(a);
                 if ($('#productCode').val()===a){
-                    transLayout()
+                    transLayout(a)
                 }
             }
-
         });
 
         console.log(message);
         $('#productCode').autocomplete({
             source: message,
             minLength:2,
+            select:function (e,ui){
+                transLayout(ui.item.label)
+            }
         });
     });
-    function transLayout(){
+    function transLayout(id){
 
         $('#addNew').addClass("hideContentToLeft").delay(1000).queue(function(){
             $(this).css("display",'none').dequeue();
             $.ajax({
-                url: "product-detail1/",
+                url: "/admin/productDetail/productDetailLayout/"+id,
                 success: function (data) {
                     $("#afterArea").html(data);
                     $('#afterArea').addClass("moveContentAfter")

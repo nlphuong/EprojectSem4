@@ -10,4 +10,5 @@ import java.util.List;
 public interface BrandService {
     public List<Brand> findAll();
     public Brand findOne(int id);
+    Brand getBrandByName(String name);
 }

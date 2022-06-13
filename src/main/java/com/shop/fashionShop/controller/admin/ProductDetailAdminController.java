@@ -1,5 +1,6 @@
 package com.shop.fashionShop.controller.admin;
 
+import com.shop.fashionShop.enumeric.Color;
 import com.shop.fashionShop.enumeric.Status;
 import com.shop.fashionShop.model.Product;
 import com.shop.fashionShop.model.ProductDetail;
@@ -12,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Date;
@@ -45,4 +47,25 @@ public class ProductDetailAdminController {
             return "redirect:/admin/productDetail/addProductDetail/"+productDetail.getProduct().getProductCode();
         }
     }
+    @PostMapping("/updateProductDetail")
+    public String updateProductDetail(@RequestParam("id") int id,@RequestParam("size") String size,@RequestParam("color") String color,@RequestParam("quantity")int quantity, @RequestParam("images") MultipartFile [] files, Model model) throws IOException {
+        ProductDetail productDetail= productDetailService.findOne(id);
+        productDetail.setSize(size);
+        productDetail.setColor(Color.valueOf(color));
+        productDetail.setQuantity(quantity);
+        productDetailService.update(productDetail,files);
+        return "redirect:/admin/product/detail/"+productDetail.getProduct().getId();
+
+    }
+    @GetMapping("/productDetailLayout/{code}")
+    public String productDetailLayout(@PathVariable String code,Model model){
+        ProductDetail productDetail=new ProductDetail();
+        Product product=productService.findByProductCode(code);
+        productDetail.setProduct(product);
+        productDetail.setSell_price(product.getPrice());
+        model.addAttribute("productDetail",productDetail);
+        model.addAttribute("product",product);
+        return "admin/product/add_product_detail";
+    }
+
 }

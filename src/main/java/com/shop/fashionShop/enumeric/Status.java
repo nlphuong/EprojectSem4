@@ -12,5 +12,10 @@ public enum Status {
     DELIVERED,
     //status order
     PAID,
-    UNPAID
+    UNPAID,
+
+    //promotion
+    WAITING,
+    EFFECTIVE,
+    EXPIRE
 }

@@ -25,4 +25,11 @@ public class Inventory {
     @ManyToOne
     @JoinColumn(name = "product_detail_id")
     private ProductDetail productDetail;
+
+    public Inventory(int amount, double price, Date createAt, ProductDetail productDetail) {
+        this.amount = amount;
+        this.price = price;
+        this.createAt = createAt;
+        this.productDetail = productDetail;
+    }
 }

@@ -54,7 +54,7 @@
                                         <tr th:each="pd:${product.productDetailSet}" >
                                             <td th:utext="${pd.color}"></td>
                                             <td th:utext="${pd.size}"></td>
-                                            <td th:utext="${pd.amount}"></td>
+                                            <td th:utext="${pd.quantity}"></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -71,8 +71,8 @@
                         <div class="card-body">
                             <form id="detailForm" th:object="${productDetail}" th:action="@{/admin/productDetail/postProductDetail}" method="post" enctype="multipart/form-data">
                                 <div class="row">
-                                    <input  th:field="*{product}"/>
-                                    <input  th:field="*{sell_price}"/>
+                                    <input hidden th:field="*{product}"/>
+                                    <input hidden th:field="*{sell_price}"/>
                                     <div class="col-md-6">
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label">Color</label>
@@ -101,7 +101,8 @@
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label">Quantity</label>
                                             <div class="col-lg-9">
-                                                <input type="number" th:field="*{amount}"  class="form-control" >
+                                                <input type="number" th:field="*{quantity}" class="form-control" >
+                                                <p th:if="${#fields.hasErrors('quantity')}" class="text-danger" th:errors="*{quantity}"></p>
                                             </div>
                                         </div>
                                     </div>

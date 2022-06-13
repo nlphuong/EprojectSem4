@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Set;
 
@@ -20,8 +21,10 @@ public class Promotion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String promotionCode;
    private Date dateStart;
    private Date dateEnd;
+   @NotNull(message = "Please input discount")
    private double discount;
    @Enumerated(EnumType.STRING)
    private Status status;

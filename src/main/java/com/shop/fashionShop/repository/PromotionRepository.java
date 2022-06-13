@@ -1,9 +1,9 @@
 package com.shop.fashionShop.repository;
 
-import com.shop.fashionShop.model.ProductImage;
+import com.shop.fashionShop.model.Promotion;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductImageRepository extends JpaRepository<ProductImage,Integer> {
+public interface PromotionRepository extends JpaRepository<Promotion,Integer> {
 }

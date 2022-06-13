@@ -1713,7 +1713,7 @@ ol {
 -----------------------*/
 
 .product-shop {
-	padding-top: 80px;
+	padding-top: 0px;
 	padding-bottom: 80px;
 }
 
@@ -1876,14 +1876,33 @@ ol {
 	color: #636363;
 }
 
+.filter-widget .fw-color-choose .cs-item .cs-violet:after,.cs-blue:after {
+	content: "";
+	position: absolute;
+	display: none;
+	left: 9px;
+	top: 5px;
+	width: 5px;
+	height: 10px;
+	border: solid white;
+	border-width: 0 3px 3px 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
 .filter-widget .fw-color-choose .cs-item label.cs-violet:before {
 	background: #8230E3;
 }
-
+.filter-widget .fw-color-choose .cs-item input:checked ~ .cs-violet:after{
+	display: block;
+}
 .filter-widget .fw-color-choose .cs-item label.cs-blue:before {
 	background: #2773BE;
 }
-
+.filter-widget .fw-color-choose .cs-item input:checked ~ .cs-blue:after{
+	display: block;
+}
 .filter-widget .fw-color-choose .cs-item label.cs-yellow:before {
 	background: #EEEE21;
 }
@@ -4310,3 +4329,34 @@ ol {
 		padding-right: 15px;
 	}
 }
+
+/*//checkbox*/
+.checkbox-teal [type="checkbox"]:checked+label:before {
+	border-color: transparent #009688 #009688 transparent;
+}
+
+.checkbox-warning-filled [type="checkbox"][class*='filled-in']:checked+label:after {
+	border-color: #FF8800;
+	background-color: #FF8800;
+}
+
+.checkbox-rounded [type="checkbox"][class*='filled-in']+label:after {
+	border-radius: 50%;
+}
+
+.checkbox-living-coral-filled [type="checkbox"][class*='filled-in']:checked+label:after {
+	border-color: #FF6F61;
+	background-color: #FF6F61;
+}
+
+.checkbox-cerulean-blue-filled [type="checkbox"][class*='filled-in']:checked+label:after {
+	border-color: #92aad0;
+	background-color: #92aad0;
+}
+
+
+
+
+
+
+

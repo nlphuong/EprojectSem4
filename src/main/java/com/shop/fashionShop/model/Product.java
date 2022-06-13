@@ -6,9 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Set;
 
@@ -35,7 +37,7 @@ public class Product {
     @Lob
     private byte[] image;
     @Column(nullable = false)
-    @NotEmpty(message = "Price can not blank!")
+    @NotNull(message = "Price can not blank!")
     private Double price;
     @Enumerated(EnumType.STRING)
     private Gender gender;

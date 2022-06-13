@@ -1,6 +1,7 @@
 package com.shop.fashionShop.service;
 
 import com.shop.fashionShop.enumeric.Status;
+import com.shop.fashionShop.model.Product;
 import com.shop.fashionShop.model.ProductDetail;
 import com.shop.fashionShop.model.ProductImage;
 import com.shop.fashionShop.repository.ProductDetailRepository;
@@ -18,4 +19,6 @@ import java.util.List;
 
 public interface ProductDetailService {
     public ProductDetail save(ProductDetail productDetail, MultipartFile [] files) throws IOException;
+    public ProductDetail findOne(int id);
+    public ProductDetail update(ProductDetail productDetail,MultipartFile[] files) throws IOException;
 }

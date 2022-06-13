@@ -15,7 +15,10 @@
     <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/admin/assets/plugins/morris/morris.css}" type="text/css">
     <link rel="stylesheet" th:href="@{/admin/assets/css/style.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/admin/assets/plugins/datatables/datatables.min.css}" type="text/css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!--    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
 </head>
 
 <body>
@@ -112,11 +115,11 @@
                     </li>
                     <li class="submenu"> <a href="#"><i class="fas fa-tshirt"></i> <span> Product </span> <span class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
-                            <li><a th:href="@{/admin/product}">All Product </a></li>
-                            <li><a th:href="@{/admin/addProduct}"> Add Product </a></li>
+                            <li><a th:href="@{/admin/product/listProduct}">All Product </a></li>
+                            <li><a th:href="@{/admin/product/addProduct}"> Add Product </a></li>
                         </ul>
                     </li>
-
+                    <li class="active"> <a th:href="@{/admin/promotion/index}"><i class="fas fa-tachometer-alt"></i> <span>Promotion</span></a> </li>
                     <li class="submenu"> <a href="#"><i class="fas fa-gifts"></i> <span> Member Card </span> <span class="menu-arrow"></span></a>
                         <ul class="submenu_class" style="display: none;">
                             <li><a th:href="@{/admin/memberCard}">All Member Card </a></li>
@@ -173,9 +176,15 @@
 <script th:src="@{/admin/assets/plugins/raphael/raphael.min.js}"></script>
 <script th:src="@{/admin/assets/plugins/morris/morris.min.js}"></script>
 <script th:src="@{/admin/assets/js/chart.morris.js}"></script>
-<script th:src="@{/admin/assets/js/script.js}"></script>
 <script th:src="@{/admin/assets/js/jquery-ui.min.js}"></script>
+<script th:src="@{/admin/assets/plugins/datatables/datatables.min.js}"></script>
+<script th:src="@{/admin/assets/plugins/datatables/jquery.dataTables.min.js}"></script>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+<script th:src="@{/admin/assets/js/script.js}"></script>
+
 <script id="script" layout:fragment="script"></script>
+
 
 </body>
 
